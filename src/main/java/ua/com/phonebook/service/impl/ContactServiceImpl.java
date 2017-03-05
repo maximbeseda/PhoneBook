@@ -9,6 +9,13 @@ import ua.com.phonebook.service.ContactService;
 
 import java.util.List;
 
+/**
+ * Implementation of {@link ContactService} interface.
+ *
+ * @author Maxim Beseda
+ * @version 1.0
+ */
+
 @Service
 public class ContactServiceImpl implements ContactService {
 

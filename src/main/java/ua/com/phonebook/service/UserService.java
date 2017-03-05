@@ -1,16 +1,22 @@
 package ua.com.phonebook.service;
 
-import ua.com.phonebook.entity.User;
+import ua.com.phonebook.entity.CustomUser;
 
 import java.util.List;
 
+/**
+ * Service class for {@link CustomUser}
+ *
+ * @author Maxim Beseda
+ * @version 1.0
+ */
 
 public interface UserService {
-    User addContact(User user);
-    User editContact(User user);
+    CustomUser addUser(CustomUser customUser);
+    CustomUser editUser(CustomUser customUser);
     void delete (long id);
-    User getById(long id);
-    User getByFullName(String fullName);
-    User getByLogin(String login);
-    List<User> getAll();
+    CustomUser getById(long id);
+    CustomUser getByFullName(String fullName);
+    CustomUser getByLogin(String login);
+    List<CustomUser> getAll();
 }

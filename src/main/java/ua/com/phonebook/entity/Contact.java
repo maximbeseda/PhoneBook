@@ -2,35 +2,53 @@ package ua.com.phonebook.entity;
 
 import javax.persistence.*;
 
+/**
+ * Simple JavaBean object that represents a Contact of {@link CustomUser}.
+ *
+ * @author Maxim Beseda
+ * @version 1.0
+ */
+
 @Entity
 @Table(name = "contacts")
 public class Contact {
     @Id
     @GeneratedValue
     private long id;
+
     @Column(nullable = false)
     private String surname;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String patronymic;
+
     @Column(nullable = false)
     private String mobilePhone;
+
     private String homePhone;
     private String email;
     private String address;
 
+    @ManyToOne
+    @JoinColumn(name = "customUser_id", nullable = false)
+    private CustomUser customUser;
+
     public Contact() {
     }
 
-    public Contact(String surname, String name, String patronymic, String mobilePhone) {
+    public Contact(String surname, String name, String patronymic, String mobilePhone, CustomUser customUser) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.mobilePhone = mobilePhone;
+        this.customUser = customUser;
     }
 
-    public Contact(String surname, String name, String patronymic, String mobilePhone, String homePhone, String email, String address) {
+    public Contact(String surname, String name, String patronymic, String mobilePhone, String homePhone,
+                   String email, String address, CustomUser customUser) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
@@ -38,6 +56,7 @@ public class Contact {
         this.homePhone = homePhone;
         this.email = email;
         this.address = address;
+        this.customUser = customUser;
     }
 
     public long getId() {
@@ -102,5 +121,28 @@ public class Contact {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public CustomUser getCustomUser() {
+        return customUser;
+    }
+
+    public void setCustomUser(CustomUser customUser) {
+        this.customUser = customUser;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", customUser=" + customUser +
+                '}';
     }
 }

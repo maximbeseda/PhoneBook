@@ -4,11 +4,21 @@ package ua.com.phonebook.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.phonebook.entity.User;
+import ua.com.phonebook.entity.CustomUser;
+import ua.com.phonebook.entity.enums.UserRole;
 import ua.com.phonebook.repository.UserRepository;
 import ua.com.phonebook.service.UserService;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+/**
+ * Implementation of {@link UserService} interface.
+ *
+ * @author Maxim Beseda
+ * @version 1.0
+ */
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,15 +28,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User addContact(User user) {
-        User savedUser = userRepository.save(user);
-        return savedUser;
+    public CustomUser addUser(CustomUser customUser) {
+        customUser.setPassword(sha1(customUser.getPassword()));
+        customUser.setUserRole(UserRole.USER);
+        userRepository.save(customUser);
+        return customUser;
     }
 
     @Override
     @Transactional
-    public User editContact(User user) {
-        return userRepository.save(user);
+    public CustomUser editUser(CustomUser customUser) {
+        customUser.setPassword(sha1(customUser.getPassword()));
+        userRepository.save(customUser);
+        return customUser;
     }
 
     @Override
@@ -37,25 +51,41 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getById(long id) {
+    public CustomUser getById(long id) {
         return userRepository.findOne(id);
     }
 
     @Override
     @Transactional
-    public User getByFullName(String fullName) {
+    public CustomUser getByFullName(String fullName) {
         return userRepository.findOrderByFullName(fullName);
     }
 
     @Override
     @Transactional
-    public User getByLogin(String login) {
+    public CustomUser getByLogin(String login) {
         return userRepository.findOrderByLogin(login);
     }
 
     @Override
     @Transactional
-    public List<User> getAll() {
+    public List<CustomUser> getAll() {
         return userRepository.findAll();
+    }
+
+    public String sha1(String input) {
+        MessageDigest mDigest = null;
+        try {
+            mDigest = MessageDigest.getInstance("SHA1");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte[] result = mDigest.digest(input.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < result.length; i++) {
+            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        return sb.toString();
     }
 }

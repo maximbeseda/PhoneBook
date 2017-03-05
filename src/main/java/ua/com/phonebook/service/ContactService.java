@@ -4,6 +4,12 @@ import ua.com.phonebook.entity.Contact;
 
 import java.util.List;
 
+/**
+ * Service class for {@link Contact}
+ *
+ * @author Maxim Beseda
+ * @version 1.0
+ */
 
 public interface ContactService {
     Contact addContact(Contact contact);
