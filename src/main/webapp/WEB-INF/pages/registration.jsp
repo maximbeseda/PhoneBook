@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +12,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="#">
 
-    <title>Cover Template for Bootstrap</title>
+    <title>Регистрация</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../resources/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,8 @@
     <link href="../../resources/dist/css/cover.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -74,7 +75,8 @@
 
                     <spring:bind path="password">
                         <div class="form-group ${status.error ? 'has-error' : ''}">
-                            <form:input type="password" path="password" class="form-control" placeholder="Пароль"></form:input>
+                            <form:input type="password" path="password" class="form-control"
+                                        placeholder="Пароль"></form:input>
                             <form:errors path="password"></form:errors>
                         </div>
                     </spring:bind>
@@ -89,13 +91,17 @@
 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
                 </form:form>
+
+
             </div>
 
             <div class="mastfoot">
                 <div class="inner">
-                    <p><a target="_blank" href="https://ua.linkedin.com/in/maxim-beseda-b6971012a">© Maxim Beseda 2017</a></p>
+                    <p><a target="_blank" href="https://ua.linkedin.com/in/maxim-beseda-b6971012a">© Maxim Beseda
+                        2017</a></p>
                 </div>
             </div>
+
 
         </div>
 

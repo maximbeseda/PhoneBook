@@ -38,8 +38,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public CustomUser editUser(CustomUser customUser) {
-        customUser.setPassword(sha1(customUser.getPassword()));
-        userRepository.save(customUser);
+        if (customUser.getPassword().equals(userRepository.findOne(customUser.getId()).getPassword())){
+            userRepository.save(customUser);
+        } else {
+            customUser.setPassword(sha1(customUser.getPassword()));
+            userRepository.save(customUser);
+        }
         return customUser;
     }
 

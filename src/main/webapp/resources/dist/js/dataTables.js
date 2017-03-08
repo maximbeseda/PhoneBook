@@ -19,14 +19,8 @@ $(document).ready(function () {
         table.row('.selected').remove().draw(false);
     });
 
-    $('#delete_contact').click(function () {
-        if (table.rows('.selected').data().length > 0) {
-            if (confirm("Вы действительно хотите удалить запись?")) {
-                var data = table.$('tr.selected').data('value');
-                $.post("/contact_delete", 'toDelete=' + data);
-                table.row('.selected').remove().draw(false);
-            }
-        }
+    $('#add_contact').click(function () {
+        window.location.href = '/contact_add';
     });
 
     $('#edit_contact').click(function () {
@@ -34,6 +28,16 @@ $(document).ready(function () {
             var data = table.$('tr.selected').data('value');
             $("#toUpdate").val(data);
             $('#formidupdate').submit();
+        }
+    });
+
+    $('#delete_contact').click(function () {
+        if (table.rows('.selected').data().length > 0) {
+            if (confirm("Вы действительно хотите удалить запись?")) {
+                var data = table.$('tr.selected').data('value');
+                $.post("/contact_delete", 'toDelete=' + data);
+                table.row('.selected').remove().draw(false);
+            }
         }
     });
 

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.com.phonebook.entity.CustomUser;
 import ua.com.phonebook.service.SecurityService;
 import ua.com.phonebook.service.UserService;
@@ -22,6 +23,7 @@ import ua.com.phonebook.validator.UserValidator;
  */
 
 @Controller
+@SessionAttributes("userForm")
 public class UserController {
 
     @Autowired
@@ -33,6 +35,7 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+
     public CustomUser getUser() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String login = user.getUsername();
@@ -40,12 +43,13 @@ public class UserController {
         return userService.getByLogin(login);
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = {"/", "/contacts"})
     public String contacts (Model model){
         CustomUser user = getUser();
         model.addAttribute("fullName", user.getFullName());
         model.addAttribute("login", user.getLogin());
         model.addAttribute("roles", user.getUserRole());
+        model.addAttribute("allContacts", user.getContacts());
 
         return "contacts";
     }

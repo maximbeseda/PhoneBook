@@ -13,7 +13,13 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/ua/com/phonebook/config/AppConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/ua/com/phonebook/Application.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/ua/com/phonebook/config/SecurityConfig.java</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="jpa" name="JPA">
       <configuration>
@@ -21,7 +27,7 @@
         <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="Entities" />
-          <factory-entry name="entityManagerFactory" />
+          <factory-entry name="entityManagerFactory" value="da43dacf-6740-47d3-ae51-2ce96b1de642" />
         </datasource-mapping>
       </configuration>
     </facet>
