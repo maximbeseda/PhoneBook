@@ -26,6 +26,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * The java application configuration file that extends {@link WebMvcConfigurerAdapter}.
+ *
+ * @author Максим Беседа
+ * @version 1.0
+ */
+
 @Configuration
 @EnableJpaRepositories("ua.com.phonebook.repository")
 @PropertySource("classpath:config.properties")
@@ -89,11 +96,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames("classpath:validation");
-        // if true, the key of the message will be displayed if the key is not
-        // found, instead of throwing a NoSuchMessageException
         messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setDefaultEncoding("Cp1251");
-        // # -1 : never reload, 0 always reload
         messageSource.setCacheSeconds(0);
         return messageSource;
     }

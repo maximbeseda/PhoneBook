@@ -59,22 +59,18 @@
               <!--Login form-->
               <spring:url value="/j_spring_security_check" var="loginUrl"/>
               <form class="navbar-form" role="form" action="${loginUrl}" method="post">
-                <div class="form-group has-feedback">
+                <div class="form-group ${error != null ? 'has-error' : ''}">
                   <input type="text" placeholder="Логин" class="form-control" name="j_login" pattern="^[a-zA-Z]{3,}$" required>
                 </div>
                 <span class="glyphicon form-control-feedback"></span>
-                <div class="form-group">
+                <div class="form-group ${error != null ? 'has-error' : ''}">
                   <input type="password" placeholder="Пароль" class="form-control" name="j_password" pattern="^[\S]{5,}$" required>
                 </div>
                 <span class="glyphicon form-control-feedback"></span>
                 <button type="submit" class="btn btn-md btn-primary">Войти</button>
               </form>
-              <c:if test="${param.error ne null}">
-                <div class="alert alert-danger alert-dismissable">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <strong>Неверный логин или пароль!</strong> Повторите попытку еще раз.
-                </div>
-              </c:if>
+              <span>${error}</span>
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </div>
 
           <div class="mastfoot">
