@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.com.phonebook.entity.CustomUser;
 import ua.com.phonebook.service.SecurityService;
 import ua.com.phonebook.service.UserService;
@@ -23,7 +22,6 @@ import ua.com.phonebook.validator.UserValidator;
  */
 
 @Controller
-@SessionAttributes("userForm")
 public class UserController {
 
     @Autowired

@@ -1,5 +1,6 @@
 package ua.com.phonebook.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -20,7 +22,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import ua.com.phonebook.service.impl.UserDetailsServiceImpl;
+import ua.com.phonebook.service.ContactService;
+import ua.com.phonebook.service.UserService;
+import ua.com.phonebook.service.impl.*;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -57,6 +61,12 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return entityManagerFactory;
     }
 
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", hbm2dllAuto);
+        return properties;
+    }
+
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
@@ -84,12 +94,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService(){
         return new UserDetailsServiceImpl();
-    }
-
-    private Properties additionalProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", hbm2dllAuto);
-        return properties;
     }
 
     @Bean

@@ -60,11 +60,11 @@
               <spring:url value="/j_spring_security_check" var="loginUrl"/>
               <form class="navbar-form" role="form" action="${loginUrl}" method="post">
                 <div class="form-group ${error != null ? 'has-error' : ''}">
-                  <input type="text" placeholder="Логин" class="form-control" name="j_login" pattern="^[a-zA-Z]{3,}$" required>
+                  <input type="text" placeholder="Логин" class="form-control" name="j_login" required>
                 </div>
                 <span class="glyphicon form-control-feedback"></span>
                 <div class="form-group ${error != null ? 'has-error' : ''}">
-                  <input type="password" placeholder="Пароль" class="form-control" name="j_password" pattern="^[\S]{5,}$" required>
+                  <input type="password" placeholder="Пароль" class="form-control" name="j_password" required>
                 </div>
                 <span class="glyphicon form-control-feedback"></span>
                 <button type="submit" class="btn btn-md btn-primary">Войти</button>
