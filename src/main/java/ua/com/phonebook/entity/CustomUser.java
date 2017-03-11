@@ -50,6 +50,14 @@ public class CustomUser {
         this.userRole = userRole;
     }
 
+    public CustomUser(String fullName, String login, String password, UserRole userRole, List<Contact> contacts) {
+        this.fullName = fullName;
+        this.login = login;
+        this.password = password;
+        this.userRole = userRole;
+        this.contacts = contacts;
+    }
+
     public long getId() {
         return id;
     }
