@@ -50,6 +50,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Value("${hbm2ddl.auto}")
     private String hbm2dllAuto;
 
+    @Autowired
+    private Environment environment;
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
             (DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
@@ -111,4 +114,29 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
     }
+
+    @Bean
+    public UserService userService(){
+        UserService service;
+        if (Boolean.parseBoolean(environment.getProperty("MySQL.db"))){
+            service =  new UserServiceImpl();
+        } else {
+            UserServiceJsonDBImpl.setJsonDataBasePath(environment.getProperty("json.database.path"));
+            service = new UserServiceJsonDBImpl();
+        }
+        return service;
+    }
+
+    @Bean
+    public ContactService contactService(){
+        ContactService service;
+        if (Boolean.parseBoolean(environment.getProperty("MySQL.db"))){
+            service =  new ContactServiceImpl();
+        } else {
+            UserServiceJsonDBImpl.setJsonDataBasePath(environment.getProperty("json.database.path"));
+            service = new ContactServiceJsonDBImpl();
+        }
+        return service;
+    }
+
 }

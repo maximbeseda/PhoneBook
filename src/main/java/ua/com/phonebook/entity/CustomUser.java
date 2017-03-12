@@ -4,6 +4,7 @@ package ua.com.phonebook.entity;
 import ua.com.phonebook.entity.enums.UserRole;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class CustomUser {
     private UserRole userRole;
 
     @OneToMany(mappedBy = "customUser", cascade = CascadeType.ALL)
-    private List<Contact> contacts;
+    private List<Contact> contacts = new ArrayList<>();
 
     public CustomUser() {
     }
